@@ -4,6 +4,7 @@ const Session = require("../models/Session");
 const {generateToken ,refreshToken , verifyEmail, VerifyPassword}= require("../helpers")
 
 
+
 const registerUser = async (req, res) => {
     try {
         const { email, password, name } = req.body;
@@ -22,10 +23,17 @@ const registerUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Register the user
-        const user = new User({ email, password: hashedPassword, name });
-        await user.save();
+        let user;
+        try{
+            user = new User({ email, password: hashedPassword, name });
+            await user.save();
+        }catch(error){
+            if (error.code == 11000 ) {
+                return res.status(409).json({ message:"User already exists"});
+            } else {throw error;}
+        }
+   
         const userId = user._id;
-
         // Create a session
         const token = generateToken({ userId: user._id });
         const session = new Session({ userId, token });
@@ -33,9 +41,9 @@ const registerUser = async (req, res) => {
         const sessionId = session._id;
 
         // Return the session token
-        res.status(200).json({ token });
+        return res.status(200).json({ token:token });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });  
     }
 };
 
@@ -57,7 +65,7 @@ const logInUser = async (req, res) => {
         // Verify user credentials
         const user =await User.findAndValidate(email,password)
         if (!user) {
-        return res.status(401).json({ message: 'Invalid credentials' });
+            return res.status(401).json({ message: 'Invalid credentials'  });
         }
         // Create a session
         const token = generateToken({ userId: user._id });
@@ -66,9 +74,9 @@ const logInUser = async (req, res) => {
         const sessionId = session._id;
     
         // Return the session token
-        res.json({ token });
+        return res.status(200).json({ message:"logged in",token:token });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: error.message });
     }
 };
 
@@ -79,38 +87,45 @@ const logOutUser = async (req, res) => {
         // Delete the session
         await Session.findOneAndDelete({token:token});
 
-        // Return success message
-        res.json({ message: 'Logout successful' });
+        res.status(200).json({ message: 'Logout successful' });
 
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 }
 
-const tokenRefresh = (req, res) => {
+const tokenRefresh = async (req, res) => {
     try {
         const oldToken = req.body.oldToken;
         if (!oldToken) {
             return res.status(401).json({ message: 'No refresh token provided' });
         }
-
-        const result = refreshToken(oldToken);
+        const result = await refreshToken(oldToken);
         if (!result.isValid) {
-            return res.status(401).json({ message: 'Invalid refresh token' });
+            return res.status(401).json({ message: result.message });
         }
-        return res.json({ token: result.token });
+        const foundSession=await Session.findOne({token:oldToken});
+        foundSession.token = result.token;
+        await foundSession.save();
+
+        return res.status(200).json({message:"Token refreshed", token: result.token });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
   
 const protectedRoute = async (req, res) => {
-    const userId = req.sessionData.userId;
-    console.log(userId)
-    const user = await User.findById(userId);
-    console.log(user)
-    res.json(`you are so awesome : ${user.email}`);
-  };
+    try {
+        const userId = req.sessionData.userId;
+
+        const user = await User.findById(userId);
+
+        res.status(200).json({message:`you are so awesome : ${user.email}`, route:"/secret"});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }  
+
+};
   
 
 // Export user functions

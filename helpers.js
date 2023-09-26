@@ -1,21 +1,25 @@
 
 const jwt = require('jsonwebtoken');
-const secret = process.env.SECRET || "no-a-good-secret-key";
+const secret = process.env.SECRET || "not-a-good-secret-key";
 
 function generateToken(payload) {
 
     return jwt.sign(payload, secret, { expiresIn :'24h'});
   }
-  
-function refreshToken(oldToken ) {
-    jwt.verify(oldToken, secret, (err, decoded) => {
-        if (err) {
-            return { isValid: false,message: 'Invalid refresh token'}
+
+async function refreshToken(oldToken ) {
+    try{
+        const result = jwt.verify(oldToken, secret)
+         if (!result) {
+            return { isValid: false, message: 'Invalid refresh token'}
         }
         // Generate a new session token with extended expiration
-        const token = generateToken({ userId: decoded.userId });
-        return { isValid: true ,token:token};
-      });
+        const token = await generateToken({ userId: result.userId });
+        return { isValid: true ,message:"new token generated", userId:result.userId, token:token};
+    
+    }catch(error){
+        return { isValid: false, message:error.message}
+    }
   }
 
 function verifyEmail(email){
