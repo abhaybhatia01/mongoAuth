@@ -1,0 +1,24 @@
+{
+  "name": "pixelwand-authentication-system",
+  "version": "1.0.0",
+  "description": "Backend authentication system for Pixelwand",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha"
+  },
+  "author": "Abhay Bhatia",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^6.0.12"
+  },
+  "devDependencies": {
+    "assert": "^2.1.0",
+    "mocha": "^9.2.2",
+    "supertest": "^6.3.3"
+  }
+}
