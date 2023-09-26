@@ -9,6 +9,10 @@ function generateToken(payload) {
 
 async function refreshToken(oldToken ) {
     try{
+        if (!oldToken) {
+            return { isValid: false, message: 'Invalid refresh token' };
+          }
+
         const result = jwt.verify(oldToken, secret)
          if (!result) {
             return { isValid: false, message: 'Invalid refresh token'}

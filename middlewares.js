@@ -13,24 +13,26 @@ async function authenticate(req, res, next) {
         return res.status(401).json({ message: 'No token provided' });
       }
 
-      //verifying token
-      const result = jwt.verify(token, secret)
+    try {
+      const result = jwt.verify(token, secret);
       if (!result) {
         return res.status(401).json({ message: 'Invalid token' });
       }
 
-      //checking if session exists
-        const session = await Session.findOne({token:token});
+      const session = await Session.findOne({ token: token });
         if (!session) {
-          return res.status(401).json({ message: 'Token expired, plese login again' });
+        return res.status(401).json({ message: 'Token expired, please login again' });
         }
 
         req.sessionData = session;
 
         next();
-    }catch(error){
-      res.status(401).json({ message: error.message });
+    } catch (error) {
+      return res.status(401).json({ message: 'Invalid token' });
     }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
 }
 
 module.exports = {

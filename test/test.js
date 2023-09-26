@@ -167,7 +167,7 @@ describe("Authentication System", () => {
                     email: email,
                     password: "Password123",
                 });
-            assert.strictEqual( response.body.message, "logged in");
+            assert.strictEqual( response.body.message, "Logged in");
             assert.strictEqual(response.status, 200);
             assert.strictEqual(typeof response.body.token, "string");
             token = response.body.token;
@@ -179,7 +179,7 @@ describe("Authentication System", () => {
                     email: email,
                     password: "Password123",
                 });
-            assert.strictEqual( response.body.message, "logged in");
+            assert.strictEqual( response.body.message, "Logged in");
             assert.strictEqual(response.status, 200);
             assert.strictEqual(typeof response.body.token, "string");
             token = response.body.token;
@@ -223,7 +223,7 @@ describe("Authentication System", () => {
                 .set('Authorization', token);
 
             assert.strictEqual(response.status, 401);
-            assert.strictEqual(response.body.message, 'Token expired, plese login again');
+            assert.strictEqual(response.body.message, 'Token expired, please login again');
         });
     });
 
