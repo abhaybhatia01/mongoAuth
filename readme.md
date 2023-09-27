@@ -30,15 +30,6 @@ http:localhost:3000/
 ```
 
    1. Register User:
-    ```sh
-      curl --location --request POST 'http://localhost:3000/user/register' \
-      --header 'Content-Type: application/json' \
-      --data-raw '{
-       "email":"<email>",
-       "password":"<password>"
-       "name":"<name>"
-      }'
-
       - Endpoint: POST /register
       - Description: Creates a new user account.
       - Request Body:
@@ -50,11 +41,19 @@ http:localhost:3000/
         - 400 Bad Request: Invalid input values. Returns an error message.
         - 409 Conflict: User already exists. Returns an error message.
         - 500 Internal Server Error: An unexpected error occurred.
-        
+
+      ```sh
+      curl --location --request POST 'http://localhost:3000/user/register' \
+      --header 'Content-Type: application/json' \
+      --data-raw '{
+       "email":"<email>",
+       "password":"<password>"
+       "name":"<name>"
+      }'
 
 
 
-   3. Log In User:
+   2. Log In User:
       - Endpoint: POST /login
       - Description: Authenticates a user and creates a session.
       - Request Body:
@@ -66,15 +65,15 @@ http:localhost:3000/
         - 401 Unauthorized: Invalid credentials. Returns an error message.
         - 500 Internal Server Error: An unexpected error occurred.
        
-          ```sh
-           curl --location --request POST 'http://localhost:3000/user/login' \
-            --header 'Content-Type: application/json' \
-            --data-raw '{
-                "email":"<email>",
-                "password":"<password>"
-            }'
+    ```sh
+     curl --location --request POST 'http://localhost:3000/user/login' \
+      --header 'Content-Type: application/json' \
+      --data-raw '{
+          "email":"<email>",
+          "password":"<password>"
+      }'
    
-   4. Token Refresh:
+   3. Token Refresh:
       - Endpoint: POST /token-refresh
       - Description: Refreshes an expired session token.
       - Request Body:
@@ -84,14 +83,14 @@ http:localhost:3000/
         - 401 Unauthorized: No refresh token provided or invalid refresh token. Returns an error message.
         - 500 Internal Server Error: An unexpected error occurred.
        
-          ```sh
-          curl --location --request POST 'http://localhost:3000/user/token-refresh' \
-            --header 'Content-Type: application/json' \
-            --data '{
-                "oldToken":"<oldToken"
-            }'
+    ```sh
+    curl --location --request POST 'http://localhost:3000/user/token-refresh' \
+      --header 'Content-Type: application/json' \
+      --data '{
+          "oldToken":"<oldToken"
+      }'
    
-   5. Protected Route:
+   4. Protected Route:
       - Endpoint: GET /secret
       - Description: Accesses a protected route that requires authentication.
       - Request Headers:
@@ -101,11 +100,11 @@ http:localhost:3000/
         - 401 Unauthorized: Invalid or expired session token. Returns an error message.
         - 500 Internal Server Error: An unexpected error occurred.
         
-        ```sh
-          curl --location --request GET 'http://localhost:3000/user/secret' \
-         --header 'authorization: <token>'
-        
-   6. Log Out User:
+     ```sh
+       curl --location --request GET 'http://localhost:3000/user/secret' \
+      --header 'authorization: <token>'
+     
+   5. Log Out User:
    - Endpoint: POST /logout
    - Description: Logs out a user by deleting the session.
    - Request Headers:
@@ -114,17 +113,17 @@ http:localhost:3000/
      - 200 OK: Logout successful. Returns a success message.
      - 500 Internal Server Error: An unexpected error occurred.
     
-     ```sh
-       curl --location --request POST 'http://localhost:3000/user/logout' \
-      --header 'authorization: <token>'
-   
+  ```sh
+    curl --location --request POST 'http://localhost:3000/user/logout' \
+   --header 'authorization: <token>'
+  ```
    ### Authentication Flow:
-      1. Register a new user by sending a POST request to /register with the required information (email and password). If successful, you will receive a session token.
-      2. Log in with an existing user by sending a POST request to /login with the email and password. If successful, you will receive a session token.
-      3. To access protected routes, include the session token in the Authorization header of the request.
-      4. To refresh an expired session token, send a POST request to /token-refresh with the oldToken (expired session token). If successful, you will receive a new session token.
-      5. To log out, send a POST request to /logout with the session token in the Authorization header. You will receive a success message.
-      6. Access the protected route /secret by sending a GET request with the session token in the Authorization header. If successful, you will receive a success message and user email.
+   1. Register a new user by sending a POST request to /register with the required information (email and password). If successful, you will receive a session token.
+   2. Log in with an existing user by sending a POST request to /login with the email and password. If successful, you will receive a session token.
+   3. To access protected routes, include the session token in the Authorization header of the request.
+   4. To refresh an expired session token, send a POST request to /token-refresh with the oldToken (expired session token). If successful, you will receive a new session token.
+   5. To log out, send a POST request to /logout with the session token in the Authorization header. You will receive a success message.
+   6. Access the protected route /secret by sending a GET request with the session token in the Authorization header. If successful, you will receive a success message and user email.
 
 ## Testing 
 ```sh
