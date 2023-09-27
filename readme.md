@@ -14,12 +14,13 @@ git clone [https://github.com/abhaybhatia01/AllCamp.git](https://github.com/abha
 npm install
 ```
 
-### start the server 
 
+### start the server 
+it creates a new db by default in your local mongo db .
+if you want to use mongodb atlas you need to put connection string in the env file.
 ```sh
 npm run start
 ```
-![image](https://github.com/abhaybhatia01/mongoAuth/assets/85993083/4d6f37a0-0d34-4b97-9bd1-aae61610a42c)
 
 
 API Documentation:
