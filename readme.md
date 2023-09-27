@@ -5,7 +5,7 @@
 ### Clone or download this repository
 
 ```sh
-git clone [https://github.com/abhaybhatia01/AllCamp.git](https://github.com/abhaybhatia01/mongoAuth.git)
+git clone https://github.com/abhaybhatia01/mongoAuth.git
 ```
 
 ### Install dependencies
@@ -25,7 +25,7 @@ npm run start
 
 ## API Documentation:
 ```sh
-[http:localhost:3000/](http://localhost:3000)
+http:localhost:3000/
 ```
 
    1. Register User:
