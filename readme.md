@@ -118,12 +118,12 @@ http:localhost:3000/
    --header 'authorization: <token>'
   ```
    ### Authentication Flow:
-   1. Register a new user by sending a POST request to /register with the required information (email and password). If successful, you will receive a session token.
-   2. Log in with an existing user by sending a POST request to /login with the email and password. If successful, you will receive a session token.
-   3. To access protected routes, include the session token in the Authorization header of the request.
-   4. To refresh an expired session token, send a POST request to /token-refresh with the oldToken (expired session token). If successful, you will receive a new session token.
-   5. To log out, send a POST request to /logout with the session token in the Authorization header. You will receive a success message.
-   6. Access the protected route /secret by sending a GET request with the session token in the Authorization header. If successful, you will receive a success message and user email.
+      1. Register a new user by sending a POST request to /register with the required information (email and password). If successful, you will receive a session token.
+      2. Log in with an existing user by sending a POST request to /login with the email and password. If successful, you will receive a session token.
+      3. To access protected routes, include the session token in the Authorization header of the request.
+      4. To refresh an expired session token, send a POST request to /token-refresh with the oldToken (expired session token). If successful, you will receive a new session token.
+      5. To log out, send a POST request to /logout with the session token in the Authorization header. You will receive a success message.
+      6. Access the protected route /secret by sending a GET request with the session token in the Authorization header. If successful, you will receive a success message and user email.
 
 ## Testing 
 ```sh
