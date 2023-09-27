@@ -48,8 +48,8 @@ http:localhost:3000/
             --data-raw '{
              "email":"abhay3@gmail.com",
              "password":"Superman2"
-            }'
-         ```
+            }'```
+
 
    2. Log In User:
       - Endpoint: POST /login
