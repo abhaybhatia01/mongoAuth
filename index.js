@@ -39,13 +39,6 @@ app.use(
 
 app.use(helmet());
 
-
-app.get("/check", async(req,res)=>{
-  const password= req.query.password;
-  const hashedPassword= req.query.hashedPassword;
-  const isValid = await bcrypt.compare(password,hashedPassword);
-return res.send({isValid:isValid})
-})
 app.use("/user",userRoutes)
 
 if(require.main === module){
