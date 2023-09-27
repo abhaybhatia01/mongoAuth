@@ -30,6 +30,15 @@ http:localhost:3000/
 ```
 
    1. Register User:
+    ```sh
+      curl --location --request POST 'http://localhost:3000/user/register' \
+      --header 'Content-Type: application/json' \
+      --data-raw '{
+       "email":"<email>",
+       "password":"<password>"
+       "name":"<name>"
+      }'
+
       - Endpoint: POST /register
       - Description: Creates a new user account.
       - Request Body:
@@ -42,17 +51,10 @@ http:localhost:3000/
         - 409 Conflict: User already exists. Returns an error message.
         - 500 Internal Server Error: An unexpected error occurred.
         
-    ```sh
-      curl --location --request POST 'http://localhost:3000/user/register' \
-      --header 'Content-Type: application/json' \
-      --data-raw '{
-       "email":"<email>",
-       "password":"<password>"
-       "name":"<name>"
-      }'
 
 
-   2. Log In User:
+
+   3. Log In User:
       - Endpoint: POST /login
       - Description: Authenticates a user and creates a session.
       - Request Body:
@@ -72,7 +74,7 @@ http:localhost:3000/
                 "password":"<password>"
             }'
    
-   3. Token Refresh:
+   4. Token Refresh:
       - Endpoint: POST /token-refresh
       - Description: Refreshes an expired session token.
       - Request Body:
@@ -89,7 +91,7 @@ http:localhost:3000/
                 "oldToken":"<oldToken"
             }'
    
-   4. Protected Route:
+   5. Protected Route:
       - Endpoint: GET /secret
       - Description: Accesses a protected route that requires authentication.
       - Request Headers:
@@ -103,7 +105,7 @@ http:localhost:3000/
           curl --location --request GET 'http://localhost:3000/user/secret' \
          --header 'authorization: <token>'
         
-   5. Log Out User:
+   6. Log Out User:
    - Endpoint: POST /logout
    - Description: Logs out a user by deleting the session.
    - Request Headers:
