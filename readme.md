@@ -129,3 +129,8 @@ npm run test
 
 
 Overall, the tests provide good coverage of the API endpoints and their expected behavior based on the API documentation.
+## What can be improved:
+       1. custom error handeling class can be defined so we can trow our custom errors and handle them accordingly.
+      2. make a heigher order fuction which will take a function and wrap it with try and catch. this way we don't have to pur try catch in every controller.
+      3. we can add content policy when we deploy to production. so that only scripts which we allow will get to run in production.
+   
