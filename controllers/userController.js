@@ -105,19 +105,22 @@ const logOutUser = async (req, res) => {
 
 const tokenRefresh = async (req, res) => {
   try {
-        const oldToken = req.body.oldToken;
-        if (!oldToken) {
-            return res.status(401).json({ message: 'No refresh token provided' });
-        }
-        const result = await refreshToken(oldToken);
-        if (!result.isValid) {
-            return res.status(401).json({ message: result.message });
-        }
-        const foundSession=await Session.findOne({token:oldToken});
-        foundSession.token = result.token;
-        await foundSession.save();
+      const oldToken = req.body.oldToken;
+      if (!oldToken) {
+          return res.status(401).json({ message: 'No refresh token provided' });
+      }
+      const result = await refreshToken(oldToken);
+      if (!result.isValid) {
+          return res.status(401).json({ message: result.message });
+      }
+      const foundSession= await Session.findOne({token:oldToken});
+      if(!foundSession){
+        return res.status(401).json({ message: 'Invalid refresh token' });
+      }
+      foundSession.token = result.token;
+      await foundSession.save();
 
-        return res.status(200).json({message:"Token refreshed", token: result.token });
+      return res.status(200).json({message:"Token refreshed", token: result.token });
   } catch (error) {
     return res.status(500).json({ message: "Internal server error" });
   }

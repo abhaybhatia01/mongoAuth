@@ -14,6 +14,7 @@ const helmet = require("helmet");
 const uri = process.env.DB_URL || 'mongodb://localhost:27017/mongoAuth';
 
 // Connect to the database
+mongoose.set("strictQuery", false);
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true})
   .then(() => {
     console.log('MongoDB connected successfully');
@@ -23,7 +24,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true})
   });
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:true}));
 
 // $ and . characters are replaced these prohibited characters with _  from user-supplied input in the following places:
 // - req.body

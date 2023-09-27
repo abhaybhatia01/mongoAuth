@@ -9,7 +9,7 @@ async function authenticate(req, res, next) {
   try{
       const token = req.headers.authorization;
     
-      if (!token) {
+      if (!token || token === null || token === undefined) {
         return res.status(401).json({ message: 'No token provided' });
       }
 
@@ -20,18 +20,18 @@ async function authenticate(req, res, next) {
       }
 
       const session = await Session.findOne({ token: token });
-        if (!session) {
+      if (!session) {
         return res.status(401).json({ message: 'Token expired, please login again' });
-        }
+      }
 
-        req.sessionData = session;
+      req.sessionData = session;
 
-        next();
+      next();
     } catch (error) {
       return res.status(401).json({ message: 'Invalid token' });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+    return res.status(500).json({ message: 'Internal server error' });
   }
 }
 
