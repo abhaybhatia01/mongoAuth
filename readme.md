@@ -24,6 +24,7 @@ npm run start
 
 
 ## API Documentation:
+default port
 ```sh
 http:localhost:3000/
 ```
