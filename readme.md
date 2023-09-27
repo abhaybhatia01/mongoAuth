@@ -17,9 +17,9 @@ npm install
 ### start the server 
 
 ```sh
-![image](https://github.com/abhaybhatia01/mongoAuth/assets/85993083/4d6f37a0-0d34-4b97-9bd1-aae61610a42c)
 npm run start
 ```
+![image](https://github.com/abhaybhatia01/mongoAuth/assets/85993083/4d6f37a0-0d34-4b97-9bd1-aae61610a42c)
 
 
 API Documentation:
