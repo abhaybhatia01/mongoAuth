@@ -1,8 +1,7 @@
 # welcome
 ## Getting Started
 
-> This app contains API secrets and passwords that have been hidden deliberately, so the app cannot be run with its features on your local machine. However, feel free to clone this repository if necessary.
-
+> This app contains connection strings and secrets that have been hidden deliberately, However, feel free to clone this repository, default values have been given to to the environment variables.
 ### Clone or download this repository
 
 ```sh
