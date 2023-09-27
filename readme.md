@@ -23,7 +23,7 @@ npm run start
 ```
 
 
-##API Documentation:
+## API Documentation:
 
 1. Register User:
    - Endpoint: POST /register
@@ -79,7 +79,7 @@ npm run start
      - 401 Unauthorized: Invalid or expired session token. Returns an error message.
      - 500 Internal Server Error: An unexpected error occurred.
 
-###Authentication Flow:
+### Authentication Flow:
 1. Register a new user by sending a POST request to /register with the required information (email and password). If successful, you will receive a session token.
 2. Log in with an existing user by sending a POST request to /login with the email and password. If successful, you will receive a session token.
 3. To access protected routes, include the session token in the Authorization header of the request.
@@ -88,7 +88,7 @@ npm run start
 6. Access the protected route /secret by sending a GET request with the session token in the Authorization header. If successful, you will receive a success message and user email.
 
 Note: Make sure to handle errors and error responses appropriately in your application.
-##Testing 
+## Testing 
 ![image](https://github.com/abhaybhatia01/mongoAuth/assets/85993083/89b80fdd-d08f-430a-a198-25558b05fcf3)
 
 ![image](https://github.com/abhaybhatia01/mongoAuth/assets/85993083/fdcd3566-6b4f-4580-b535-5beb791a5c90)
