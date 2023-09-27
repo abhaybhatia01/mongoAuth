@@ -94,8 +94,8 @@ npm run start
    ![image](https://github.com/abhaybhatia01/mongoAuth/assets/85993083/fdcd3566-6b4f-4580-b535-5beb791a5c90)
    
    
-   The tests validate the following aspects mentioned in the API documentation: 
-    ## Integration testing 
+   The tests validate the following aspects mentioned in the API documentation.
+   ## Integration testing 
    1. User Registration: 
       - Tests are performed to check for errors when creating a user, such as missing email, invalid email format, missing password, password less than 8 characters, and password not meeting the required criteria. 
       - A test is also included to register a new user successfully. 
