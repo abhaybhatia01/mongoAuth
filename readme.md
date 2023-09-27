@@ -100,11 +100,11 @@ http:localhost:3000/
         - 200 OK: Access granted. Returns a success message and user email.
         - 401 Unauthorized: Invalid or expired session token. Returns an error message.
         - 500 Internal Server Error: An unexpected error occurred.
-        
-        ```sh
-          curl --location --request GET 'http://localhost:3000/user/secret' \
-         --header 'authorization: <token>'
-        ```
+     
+  ```sh
+    curl --location --request GET 'http://localhost:3000/user/secret' \
+   --header 'authorization: <token>'
+  ```
      
    5. Log Out User:
    - Endpoint: POST /logout
@@ -114,11 +114,11 @@ http:localhost:3000/
    - Response:
      - 200 OK: Logout successful. Returns a success message.
      - 500 Internal Server Error: An unexpected error occurred.
-    
-     ```sh
-       curl --location --request POST 'http://localhost:3000/user/logout' \
-      --header 'authorization: <token>'
-     ```
+ 
+  ```sh
+    curl --location --request POST 'http://localhost:3000/user/logout' \
+   --header 'authorization: <token>'
+  ```
    ### Authentication Flow:
       1. Register a new user by sending a POST request to /register with the required information (email and password). If successful, you will receive a session token.
       2. Log in with an existing user by sending a POST request to /login with the email and password. If successful, you will receive a session token.
