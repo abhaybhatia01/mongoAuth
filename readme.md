@@ -5,13 +5,20 @@
 ### Clone or download this repository
 
 ```sh
-git clone https://github.com/abhaybhatia01/AllCamp.git
+git clone [https://github.com/abhaybhatia01/AllCamp.git](https://github.com/abhaybhatia01/mongoAuth.git)
 ```
 
 ### Install dependencies
 
 ```sh
 npm install
+```
+
+### start the server 
+
+```sh
+![image](https://github.com/abhaybhatia01/mongoAuth/assets/85993083/4d6f37a0-0d34-4b97-9bd1-aae61610a42c)
+npm run start
 ```
 
 
