@@ -1,3 +1,4 @@
+![image](https://github.com/abhaybhatia01/mongoAuth/assets/85993083/fdcd3566-6b4f-4580-b535-5beb791a5c90)
 
 The tests validate the following aspects mentioned in the API documentation: 
  
