@@ -42,14 +42,14 @@ http:localhost:3000/
         - 409 Conflict: User already exists. Returns an error message.
         - 500 Internal Server Error: An unexpected error occurred.
         
-          ```sh
-            curl --location --request POST 'http://localhost:3000/user/register' \
-            --header 'Content-Type: application/json' \
-            --data-raw '{
-             "email":"<email>",
-             "password":"<password>"
-             "name":"<name>"
-            }'
+    ```sh
+      curl --location --request POST 'http://localhost:3000/user/register' \
+      --header 'Content-Type: application/json' \
+      --data-raw '{
+       "email":"<email>",
+       "password":"<password>"
+       "name":"<name>"
+      }'
 
 
    2. Log In User:
@@ -89,20 +89,7 @@ http:localhost:3000/
                 "oldToken":"<oldToken"
             }'
    
-   4. Log Out User:
-      - Endpoint: POST /logout
-      - Description: Logs out a user by deleting the session.
-      - Request Headers:
-        - Authorization: string (required) - Session token.
-      - Response:
-        - 200 OK: Logout successful. Returns a success message.
-        - 500 Internal Server Error: An unexpected error occurred.
-       
-        ```sh
-          curl --location --request POST 'http://localhost:3000/user/logout' \
-         --header 'authorization: <token>'
-   
-   5. Protected Route:
+   4. Protected Route:
       - Endpoint: GET /secret
       - Description: Accesses a protected route that requires authentication.
       - Request Headers:
@@ -115,6 +102,19 @@ http:localhost:3000/
         ```sh
           curl --location --request GET 'http://localhost:3000/user/secret' \
          --header 'authorization: <token>'
+        
+   5. Log Out User:
+   - Endpoint: POST /logout
+   - Description: Logs out a user by deleting the session.
+   - Request Headers:
+     - Authorization: string (required) - Session token.
+   - Response:
+     - 200 OK: Logout successful. Returns a success message.
+     - 500 Internal Server Error: An unexpected error occurred.
+    
+     ```sh
+       curl --location --request POST 'http://localhost:3000/user/logout' \
+      --header 'authorization: <token>'
    
    ### Authentication Flow:
       1. Register a new user by sending a POST request to /register with the required information (email and password). If successful, you will receive a session token.
